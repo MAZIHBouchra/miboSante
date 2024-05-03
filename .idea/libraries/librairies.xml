@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="librairies">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/librairies/miglayout-swing.jar!/" />
+      <root url="jar://$PROJECT_DIR$/librairies/swingx-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/librairies/flatlaf-3.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/librairies/miglayout-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/librairies/swing-worker-1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/librairies/jsvg-1.4.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/librairies/TimingFramework-0.55.jar!/" />
+      <root url="jar://$PROJECT_DIR$/librairies/flatlaf-extras-3.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/librairies/raven-project.jar!/" />
+      <root url="jar://$PROJECT_DIR$/librairies/miglayout-4.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/librairies/filters-2.0.235.jar!/" />
+      <root url="jar://$PROJECT_DIR$/librairies/swing-datetime-picker-1.1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/NetBeans-21/netbeans/java/modules/ext/AbsoluteLayout.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

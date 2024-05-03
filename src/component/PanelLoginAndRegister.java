@@ -6,7 +6,7 @@ package component;
 
 
 import java.sql.ResultSet;
-import com.mycompany.Main.MainDash;
+import mycompany.Main.MainDash;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;

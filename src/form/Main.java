@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
 package form;
 
@@ -69,8 +65,8 @@ public class Main extends javax.swing.JFrame {
                 if(fraction>=0.5f){
                     loginAndRegister.showRegister(isLogin);
                 }
-                fractionCover=Double.valueOf(df.format(fractionCover));
-                fractionLogin=Double.valueOf(df.format(fractionLogin));
+                fractionCover = fractionCover;  // No formatting
+                fractionLogin = fractionLogin;
                 layout.setComponentConstraints(cover, "width " +size+ "%, pos "+fractionCover+"al 0 n 100%");
                 layout.setComponentConstraints(loginAndRegister, "width " +loginSize+ "%, pos "+fractionLogin+"al 0 n 100%");
                 bg.revalidate();

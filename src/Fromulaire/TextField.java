@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package FormInformation;
+package Fromulaire;
 
 /**
  *
@@ -10,15 +10,22 @@ package FormInformation;
  */
 
 
-import org.jdesktop.swingx.graphics.ShadowRenderer;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicTextFieldUI;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.geom.Area;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicTextFieldUI;
+import org.jdesktop.swingx.graphics.ShadowRenderer;
+
+import swing.RippleEffect;
+
+
 
 
 public class TextField extends JTextField {

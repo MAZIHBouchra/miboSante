@@ -2,12 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package FormInformation;
+package Fromulaire;
 
 
+import java.awt.Color;
+import java.awt.Font;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.BorderFactory;
+import javax.swing.JFormattedTextField;
+import javax.swing.border.EmptyBorder;
+import org.jdesktop.swingx.JXDatePicker;
+import org.jdesktop.swingx.JXMonthView;
 import raven.datetime.component.date.DatePicker;
-
-import java.awt.*;
 
 public class DatePickerDesign {
     public static void styleDatePicker(DatePicker datePicker) {

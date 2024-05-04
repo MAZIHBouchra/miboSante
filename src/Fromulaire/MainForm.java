@@ -1,25 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package FormInformation;
+
+package Fromulaire;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Color;
+import java.awt.Font;
+import java.time.LocalDate;
+import java.util.Calendar;
+import javax.swing.BorderFactory;
+import javax.swing.JFormattedTextField;
+import javax.swing.UIManager;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  *
  * @author AdMin
  */
-public class Main extends javax.swing.JFrame {
+public class MainForm extends javax.swing.JFrame {
+    private raven.datetime.component.date.DatePicker datePicker;
 
     /**
      * Creates new form Main
      */
-    public Main() {
+    public MainForm() {
          try {
             UIManager.setLookAndFeel(new FlatLightLaf()); // Appliquer FlatLaf en premier
         } catch (Exception e) {
@@ -30,11 +32,14 @@ public class Main extends javax.swing.JFrame {
        UIManager.put("ComboBox.selectionForeground", Color.BLACK);
         initComponents();
         
-        raven.datetime.component.date.DatePicker datePicker = new raven.datetime.component.date.DatePicker(); 
- JFormattedTextField editor = new JFormattedTextField(); 
+
+JFormattedTextField editor = new JFormattedTextField();
  editor.setFont(new Font("SansSerif", Font.PLAIN, 16)); // Adjust size as needed
 editor.setForeground(new Color(51, 51, 51)); // Dark gray text
 editor.setBackground(new Color(255,255,255)); // Light gray background
+        datePicker = new raven.datetime.component.date.DatePicker();
+
+        // ... rest of your code ...
 
 // Border
 editor.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200))); 
@@ -47,8 +52,9 @@ datePicker.setEditor(editor);
 DatePickerDesign.styleDatePicker(datePicker);
 jPanel7.setLayout(new MigLayout());
   jPanel7.add(editor, "width 250"); 
-   buttonGroup1.add(Male);
-    buttonGroup1.add(Female);
+   gender.add(Male);
+    gender.add(Female);
+    
     }
 
     /**
@@ -60,7 +66,7 @@ jPanel7.setLayout(new MigLayout());
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        gender = new javax.swing.ButtonGroup();
         jPanel1 = new GradiantColor();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -81,16 +87,16 @@ jPanel7.setLayout(new MigLayout());
         jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jComboBox1 = new Combobox();
-        jComboBox2 = new Combobox();
-        jComboBox5 = new ComboBoxMultiSelection();
+        exercise_frequency = new Combobox();
+        main_goal = new Combobox();
+        food_allergies = new ComboBoxMultiSelection();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jComboBox3 = new Combobox();
-        jComboBox4 = new Combobox();
-        jComboBox6 = new ComboBoxMultiSelection();
+        leafy_greens_intake = new Combobox();
+        most_done_exercise = new Combobox();
+        long_term_health_problems = new ComboBoxMultiSelection();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -100,13 +106,14 @@ jPanel7.setLayout(new MigLayout());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1246, 226));
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel5.setForeground(new Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("                                                                                                                 INFORMATION PERSONNEL");
-        jLabel5.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -127,13 +134,13 @@ jPanel7.setLayout(new MigLayout());
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1250, 40));
 
-        jPanel2.setBackground(new Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel5.setBackground(new Color(255, 255, 255));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
-        LastName.setFont(new Font("Roboto Condensed", 0, 12)); // NOI18N
+        LastName.setFont(new java.awt.Font("Roboto Condensed", 0, 12)); // NOI18N
 
-        jPanel7.setBackground(new Color(255, 255, 255));
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -146,19 +153,19 @@ jPanel7.setLayout(new MigLayout());
             .addGap(0, 52, Short.MAX_VALUE)
         );
 
-        jLabel1.setBackground(new Color(255, 255, 255));
-        jLabel1.setFont(new Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
-        jLabel1.setForeground(new Color(125, 132, 150));
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(125, 132, 150));
         jLabel1.setText("    First Name");
 
-        jLabel2.setBackground(new Color(255, 255, 255));
-        jLabel2.setFont(new Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
-        jLabel2.setForeground(new Color(125, 132, 150));
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(125, 132, 150));
         jLabel2.setText("    Last Name");
 
-        jLabel7.setBackground(new Color(255, 255, 255));
-        jLabel7.setFont(new Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
-        jLabel7.setForeground(new Color(125, 132, 150));
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(125, 132, 150));
         jLabel7.setText("Date of Birth: (YYYY-MM-DD)");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -166,7 +173,7 @@ jPanel7.setLayout(new MigLayout());
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(214, Short.MAX_VALUE)
+                .addContainerGap(141, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
@@ -194,9 +201,9 @@ jPanel7.setLayout(new MigLayout());
                 .addGap(85, 85, 85))
         );
 
-        jPanel6.setBackground(new Color(255, 255, 255));
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        Male.setFont(new Font("Roboto Medium", 0, 14)); // NOI18N
+        Male.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         Male.setText("Male");
         Male.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,7 +211,7 @@ jPanel7.setLayout(new MigLayout());
             }
         });
 
-        Female.setFont(new Font("Roboto Medium", 0, 14)); // NOI18N
+        Female.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         Female.setText("Female");
         Female.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,19 +219,19 @@ jPanel7.setLayout(new MigLayout());
             }
         });
 
-        jLabel3.setBackground(new Color(255, 255, 255));
-        jLabel3.setFont(new Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
-        jLabel3.setForeground(new Color(125, 132, 150));
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(125, 132, 150));
         jLabel3.setText("Weight");
 
-        jLabel6.setBackground(new Color(255, 255, 255));
-        jLabel6.setFont(new Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
-        jLabel6.setForeground(new Color(125, 132, 150));
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(125, 132, 150));
         jLabel6.setText("Size in cm");
 
-        jLabel8.setBackground(new Color(255, 255, 255));
-        jLabel8.setFont(new Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
-        jLabel8.setForeground(new Color(125, 132, 150));
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(125, 132, 150));
         jLabel8.setText("Gender");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -234,20 +241,18 @@ jPanel7.setLayout(new MigLayout());
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
+                        .addGap(65, 65, 65)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Weight, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel3)
-                            .addComponent(Size, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Size, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(Male)
-                                .addGap(43, 43, 43)
-                                .addComponent(Female)))))
+                        .addGap(100, 100, 100)
+                        .addComponent(Male)
+                        .addGap(40, 40, 40)
+                        .addComponent(Female)))
                 .addContainerGap(307, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -290,58 +295,49 @@ jPanel7.setLayout(new MigLayout());
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1250, 250));
 
-        jPanel3.setBackground(new Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel8.setBackground(new Color(255, 255, 255));
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
-        jComboBox1.setFont(new Font("Roboto Medium", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Never", "1-2 times per week", "3-4 times per week", "5-6 times per week", "7 times per week" }));
+        exercise_frequency.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        exercise_frequency.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Never", "1-2 times per week", "3-4 times per week", "5-6 times per week", "7 times per week" }));
 
-        jComboBox2.setFont(new Font("Roboto Medium", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lose weight", "Gain muscle", "Improve fitness", "Sleep better", "Eat healthier", "Manage stress", "Other" }));
+        main_goal.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        main_goal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lose weight", "Gain muscle", "Improve fitness", "Sleep better", "Eat healthier", "Manage stress", "Other" }));
 
-        jComboBox5.setFont(new Font("Roboto Medium", 0, 14)); // NOI18N
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dairy", "Eggs", "Peanuts", "Tree", "nuts", "Soy", "Wheat", "Fish", "Shellfish", "Other" }));
+        food_allergies.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        food_allergies.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dairy", "Eggs", "Peanuts", "Tree", "nuts", "Soy", "Wheat", "Fish", "Shellfish", "Other" }));
 
-        jLabel9.setBackground(new Color(255, 255, 255));
-        jLabel9.setFont(new Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
-        jLabel9.setForeground(new Color(125, 132, 150));
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(125, 132, 150));
         jLabel9.setText("What are your main health goals?");
 
-        jLabel10.setBackground(new Color(255, 255, 255));
-        jLabel10.setFont(new Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
-        jLabel10.setForeground(new Color(125, 132, 150));
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel10.setFont(new java.awt.Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(125, 132, 150));
         jLabel10.setText("How many times a week do you exercise?");
 
-        jLabel11.setBackground(new Color(255, 255, 255));
-        jLabel11.setFont(new Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
-        jLabel11.setForeground(new Color(125, 132, 150));
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(125, 132, 150));
         jLabel11.setText("Are there any foods that you can't eat or are allergic to?");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(182, 182, 182))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel10)))
-                        .addGap(57, 57, 57))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(125, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addGap(95, 95, 95))
+                .addGap(0, 138, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(exercise_frequency, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(food_allergies, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(main_goal, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(57, 57, 57))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,51 +345,51 @@ jPanel7.setLayout(new MigLayout());
                 .addContainerGap()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addComponent(main_goal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(exercise_frequency, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(food_allergies, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
 
-        jPanel9.setBackground(new Color(255, 255, 255));
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
-        jComboBox3.setFont(new Font("Roboto Medium", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 serving per day", "2 servings per day", "3 servings per day", "4 or more servings per day" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        leafy_greens_intake.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        leafy_greens_intake.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 serving per day", "2 servings per day", "3 servings per day", "4 or more servings per day" }));
+        leafy_greens_intake.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                leafy_greens_intakeActionPerformed(evt);
             }
         });
 
-        jComboBox4.setFont(new Font("Roboto Medium", 0, 14)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Walking", "Running", "Swimming", "Cycling", "Weightlifting", "Team sports", "Yoga", "Pilates", "Other" }));
+        most_done_exercise.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        most_done_exercise.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Walking", "Running", "Swimming", "Cycling", "Weightlifting", "Team sports", "Yoga", "Pilates", "Other" }));
 
-        jComboBox6.setFont(new Font("Roboto Medium", 0, 14)); // NOI18N
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Diabetes", "Heart disease", "High blood pressure", "High cholesterol", "Cancer", "Lung disease", "Thyroid disease", "Mental health condition", "Other" }));
+        long_term_health_problems.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
+        long_term_health_problems.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Diabetes", "Heart disease", "High blood pressure", "High cholesterol", "Cancer", "Lung disease", "Thyroid disease", "Mental health condition", "Other" }));
 
-        jLabel12.setBackground(new Color(255, 255, 255));
-        jLabel12.setFont(new Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
-        jLabel12.setForeground(new Color(125, 132, 150));
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(125, 132, 150));
         jLabel12.setText("In general, what  mostof exercises do you do?");
 
-        jLabel13.setBackground(new Color(255, 255, 255));
-        jLabel13.setFont(new Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
-        jLabel13.setForeground(new Color(125, 132, 150));
+        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel13.setFont(new java.awt.Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(125, 132, 150));
         jLabel13.setText("How often do you eat leafy greens and veggies every day?");
 
-        jLabel14.setBackground(new Color(255, 255, 255));
-        jLabel14.setFont(new Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
-        jLabel14.setForeground(new Color(125, 132, 150));
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel14.setFont(new java.awt.Font("Roboto Slab SemiBold", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(125, 132, 150));
         jLabel14.setText("Do you have any long-term health problems that might affect your overall health?  ");
 
-        jButton1.setBackground(new Color(102, 204, 255));
-        jButton1.setFont(new Font("Roboto Medium", 0, 14)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(102, 204, 255));
+        jButton1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -410,14 +406,14 @@ jPanel7.setLayout(new MigLayout());
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(long_term_health_problems, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(most_done_exercise, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12)
                             .addComponent(jLabel14)
                             .addComponent(jLabel13))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(leafy_greens_intake, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(48, 48, 48))))
@@ -428,20 +424,20 @@ jPanel7.setLayout(new MigLayout());
                 .addGap(11, 11, 11)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(most_done_exercise, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(leafy_greens_intake, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel14)
-                        .addGap(24, 24, 24)
-                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel14))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(long_term_health_problems, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -465,10 +461,10 @@ jPanel7.setLayout(new MigLayout());
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 1250, 300));
 
-        jLabel4.setFont(new Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel4.setForeground(new Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("                                                                                                                 INFORMATION PERSONNEL");
-        jLabel4.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -492,6 +488,58 @@ jPanel7.setLayout(new MigLayout());
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    public FormData getFormData() {
+    FormData formData = new FormData();
+
+    formData.setFirstName(FirstName.getText());
+    formData.setLastName(LastName.getText());
+
+    try {
+        formData.setWeight(Integer.parseInt(Weight.getText()));
+    } catch (NumberFormatException e) {
+        // Handle error
+    }
+
+    try {
+        formData.setSizeInCm(Integer.parseInt(Size.getText()));
+    } catch (NumberFormatException e) {
+        // Handle error
+    }
+
+    formData.setGender(Male.isSelected() ? "Male" : "Female");
+        String selectedExerciseFrequency = (String)exercise_frequency.getSelectedItem();
+        int exerciseFrequencyValue = 0;
+        switch (selectedExerciseFrequency) {
+            case "Never":
+                exerciseFrequencyValue = 0;
+                break;
+            case "1-2 times per week":
+                exerciseFrequencyValue = 1;
+                break;
+            case "3-4 times per week":
+                exerciseFrequencyValue = 2;
+                break;
+            case "5-6 times per week":
+                exerciseFrequencyValue = 3;
+                break;
+            case "7 times per week":
+                exerciseFrequencyValue = 4;
+                break;
+        }
+        formData.setExerciseFrequency(exerciseFrequencyValue);
+  LocalDate selectedCalendar = datePicker.getSelectedDate();
+if (selectedCalendar != null) {
+    java.util.Date selectedDate = java.sql.Date.valueOf(selectedCalendar);
+    formData.setDateOfBirth(new java.sql.Date(selectedDate.getTime()));
+}
+        formData.setMainGoal((String)main_goal.getSelectedItem());
+    formData.setFoodAllergies((String)food_allergies.getSelectedItem());
+    formData.setLeafyGreensIntake((String)leafy_greens_intake.getSelectedItem());
+    formData.setMostDoneExercise((String)most_done_exercise.getSelectedItem());
+    formData.setLongTermHealthProblems((String)long_term_health_problems.getSelectedItem());
+
+    return formData;
+}
 
     private void MaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleActionPerformed
         // TODO add your handling code here:
@@ -501,12 +549,13 @@ jPanel7.setLayout(new MigLayout());
         // TODO add your handling code here:
     }//GEN-LAST:event_FemaleActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void leafy_greens_intakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leafy_greens_intakeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_leafy_greens_intakeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        FormData formData = getFormData();
+        formData.insertIntoDatabase();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -519,27 +568,28 @@ jPanel7.setLayout(new MigLayout());
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new MainForm().setVisible(true);
             }
         });
     }
@@ -551,14 +601,10 @@ jPanel7.setLayout(new MigLayout());
     private javax.swing.JRadioButton Male;
     private javax.swing.JTextField Size;
     private javax.swing.JTextField Weight;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> exercise_frequency;
+    private javax.swing.JComboBox<String> food_allergies;
+    private javax.swing.ButtonGroup gender;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -582,5 +628,9 @@ jPanel7.setLayout(new MigLayout());
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JComboBox<String> leafy_greens_intake;
+    private javax.swing.JComboBox<String> long_term_health_problems;
+    private javax.swing.JComboBox<String> main_goal;
+    private javax.swing.JComboBox<String> most_done_exercise;
     // End of variables declaration//GEN-END:variables
 }

@@ -22,7 +22,7 @@ public class Main extends javax.swing.JFrame {
     private final double coverSize=40;
     private final double loginSize=60;
     private final DecimalFormat df=new DecimalFormat("##0.###");
-    
+    private final double hhhh=60;
     
     
     public Main() {

@@ -101,7 +101,8 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
     private void insertUserData(String name, String email, String password) {
     try {
-        // Créer une connexion à la base de données et préparer la requête d'insertion
+        //second to database simo "jdbc:mysql://localhost:3306/loginschema", "root", "1234"
+        // Établir une connexion à la base de données
         Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
         String query = "INSERT INTO users (nom, email, mot_de_passe) VALUES (?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);

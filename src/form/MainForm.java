@@ -69,8 +69,8 @@ public class MainForm extends javax.swing.JFrame {
                 if(fraction>=0.5f){
                     loginAndRegister.showRegister(isLogin);
                 }
-                fractionCover=Double.valueOf(df.format(fractionCover));
-                fractionLogin=Double.valueOf(df.format(fractionLogin));
+                fractionCover=Double.valueOf(fractionCover);
+                fractionLogin=Double.valueOf(fractionLogin);
                 layout.setComponentConstraints(cover, "width " +size+ "%, pos "+fractionCover+"al 0 n 100%");
                 layout.setComponentConstraints(loginAndRegister, "width " +loginSize+ "%, pos "+fractionLogin+"al 0 n 100%");
                 bg.revalidate();

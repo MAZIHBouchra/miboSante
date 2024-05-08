@@ -8,7 +8,6 @@ package component;
 import java.sql.ResultSet;
 
 import Fromulaire.MainForm;
-import mycompany.Main.MainDash;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -188,7 +187,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
             // Vérifier les informations d'identification dans la base de données
             if (authenticateUser(email, password)) {
                 // Si l'authentification réussit, afficher le tableau de bord
-                showDashboard();
+                //showDashboard();
             } else {
                 // Sinon, afficher un message d'erreur ou une notification à l'utilisateur
                 JOptionPane.showMessageDialog(null, "Invalid email or password. Please try again.", "Authentication Failed", JOptionPane.ERROR_MESSAGE);
@@ -227,12 +226,12 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     }
     return authenticated;
 }
-    private void showDashboard() {
-    // Afficher le tableau de bord en changeant l'affichage ou en chargeant une nouvelle fenêtre
-    // Exemple :
-    MainForm dashboard = new  MainForm();
-    dashboard.setVisible(true);
-}
+//    private void showDashboard() {
+//    // Afficher le tableau de bord en changeant l'affichage ou en chargeant une nouvelle fenêtre
+//    // Exemple :
+//    MainForm dashboard = new  MainForm();
+//    dashboard.setVisible(true);
+//}
     
     public void showRegister(boolean show){
         if(show){

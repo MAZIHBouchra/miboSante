@@ -88,11 +88,7 @@ public class PanelCover extends javax.swing.JPanel {
     }
     
     public void registerLeft(double v){
-        try {
-            v = Double.valueOf(df.format(v));
-        } catch (NumberFormatException e) {
-            System.err.println("NumberFormatException: " + e.getMessage());
-        }
+        v=Double.valueOf(df.format(v));
         login(false);
         layout.setComponentConstraints(title, "pad 0 -"+v+"% 0 0");
         layout.setComponentConstraints(description, "pad 0 -"+v+"% 0 0");
@@ -100,12 +96,7 @@ public class PanelCover extends javax.swing.JPanel {
     }
     
     public void registerRight(double v){
-        try {
-            String formattedString = df.format(v).replace(',', '.');
-            v = Double.valueOf(formattedString);
-        } catch (NumberFormatException e) {
-            System.err.println("NumberFormatException: " + e.getMessage());
-        }
+        v=Double.valueOf(df.format(v));
         login(false);
         layout.setComponentConstraints(title, "pad 0 -"+v+"% 0 0");
         layout.setComponentConstraints(description, "pad 0 -"+v+"% 0 0");
@@ -113,12 +104,7 @@ public class PanelCover extends javax.swing.JPanel {
     }
     
     public void loginLeft(double v){
-        try {
-            String formattedString = df.format(v).replace(',', '.');
-            v = Double.valueOf(formattedString);
-        } catch (NumberFormatException e) {
-            System.err.println("NumberFormatException: " + e.getMessage());
-        }
+        v=Double.valueOf(df.format(v));
         login(true);
         layout.setComponentConstraints(title, "pad 0 "+v+"% 0 "+v+"%");
         layout.setComponentConstraints(description, "pad 0 "+v+"% 0 "+v+"%");
@@ -126,12 +112,7 @@ public class PanelCover extends javax.swing.JPanel {
     }
     
     public void loginRight(double v){
-        try {
-            String formattedString = df.format(v).replace(',', '.');
-            v = Double.valueOf(formattedString);
-        } catch (NumberFormatException e) {
-            System.err.println("NumberFormatException: " + e.getMessage());
-        }
+        v=Double.valueOf(df.format(v));
         login(true);
         layout.setComponentConstraints(title, "pad 0 "+v+"% 0 "+v+"%");
         layout.setComponentConstraints(description, "pad 0 "+v+"% 0 "+v+"%");

@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 
 package form;
 
@@ -11,8 +15,7 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
-
-public class Main extends javax.swing.JFrame {
+public class MainForm extends javax.swing.JFrame {
     
     private MigLayout layout;
     private PanelCover cover;
@@ -22,10 +25,10 @@ public class Main extends javax.swing.JFrame {
     private final double coverSize=40;
     private final double loginSize=60;
     private final DecimalFormat df=new DecimalFormat("##0.###");
-    private final double hhhh=60;
     
     
-    public Main() {
+    
+    public MainForm() {
         initComponents();
         init();
     }
@@ -66,8 +69,8 @@ public class Main extends javax.swing.JFrame {
                 if(fraction>=0.5f){
                     loginAndRegister.showRegister(isLogin);
                 }
-                fractionCover = fractionCover;  // No formatting
-                fractionLogin = fractionLogin;
+                fractionCover=Double.valueOf(df.format(fractionCover));
+                fractionLogin=Double.valueOf(df.format(fractionLogin));
                 layout.setComponentConstraints(cover, "width " +size+ "%, pos "+fractionCover+"al 0 n 100%");
                 layout.setComponentConstraints(loginAndRegister, "width " +loginSize+ "%, pos "+fractionLogin+"al 0 n 100%");
                 bg.revalidate();
@@ -144,20 +147,21 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new MainForm().setVisible(true);
             }
         });
     }

@@ -1,8 +1,8 @@
 package Fromulaire;
 
+import com.raven.main.Main;
 import java.sql.*;
 import javax.swing.JOptionPane;
-import mycompany.Main.MainDash;
 public class FormData {
     private String firstName;
     private String lastName;
@@ -166,7 +166,7 @@ public void insertIntoDatabase() {
                     throw new SQLException("Creating health goals failed, no rows affected.");
                 } else {
                     JOptionPane.showMessageDialog(null, "Data inserted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    MainDash mainDashboard = new MainDash();
+                    Main mainDashboard = new Main();
                     mainDashboard.setVisible(true);
                 }
             } else {

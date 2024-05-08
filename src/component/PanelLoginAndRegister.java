@@ -5,9 +5,8 @@
 package component;
 
 
+import com.raven.main.Main;
 import java.sql.ResultSet;
-
-import Fromulaire.MainForm;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -28,10 +27,10 @@ import net.miginfocom.swing.MigLayout;
 import swingForm.Button;
 import swingForm.MyPasswordField;
 import swingForm.MyTextField;
-import Fromulaire.FormData;
+
 
 public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
-
+    
     public PanelLoginAndRegister() {
         initComponents();
         initRegister();
@@ -103,7 +102,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     private void insertUserData(String name, String email, String password) {
     try {
         // Créer une connexion à la base de données et préparer la requête d'insertion
-        Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/loginschema", "root", "1234");
+        Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
         String query = "INSERT INTO users (nom, email, mot_de_passe) VALUES (?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);
         
@@ -187,7 +186,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
             // Vérifier les informations d'identification dans la base de données
             if (authenticateUser(email, password)) {
                 // Si l'authentification réussit, afficher le tableau de bord
-                //showDashboard();
+                showDashboard();
             } else {
                 // Sinon, afficher un message d'erreur ou une notification à l'utilisateur
                 JOptionPane.showMessageDialog(null, "Invalid email or password. Please try again.", "Authentication Failed", JOptionPane.ERROR_MESSAGE);
@@ -201,7 +200,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     boolean authenticated = false;
     try {
         // Établir une connexion à la base de données
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
         
         // Préparer la requête SQL pour rechercher l'utilisateur avec l'email donné et le mot de passe correspondant
         String sql = "SELECT * FROM users WHERE email = ? AND mot_de_passe = ?";
@@ -226,12 +225,12 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     }
     return authenticated;
 }
-//    private void showDashboard() {
-//    // Afficher le tableau de bord en changeant l'affichage ou en chargeant une nouvelle fenêtre
-//    // Exemple :
-//    MainForm dashboard = new  MainForm();
-//    dashboard.setVisible(true);
-//}
+    private void showDashboard() {
+    // Afficher le tableau de bord en changeant l'affichage ou en chargeant une nouvelle fenêtre
+    // Exemple :
+    Main dashboard = new Main();
+    dashboard.setVisible(true);
+}
     
     public void showRegister(boolean show){
         if(show){

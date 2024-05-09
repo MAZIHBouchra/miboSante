@@ -139,6 +139,11 @@ jPanel7.setLayout(new MigLayout());
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
         LastName.setFont(new java.awt.Font("Roboto Condensed", 0, 12)); // NOI18N
+        LastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LastNameActionPerformed(evt);
+            }
+        });
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -557,6 +562,10 @@ if (selectedCalendar != null) {
         FormData formData = getFormData();
         formData.insertIntoDatabase();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void LastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LastNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LastNameActionPerformed
 
     /**
      * @param args the command line arguments

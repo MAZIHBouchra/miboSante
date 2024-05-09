@@ -1,8 +1,15 @@
 package com.raven.form;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import javax.swing.*;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import com.raven.model.SleepDataDAO;
 import net.miginfocom.swing.MigLayout;
 import raven.datetime.component.time.TimeSelectionListener;
 import swingForm.Button;
@@ -94,12 +101,55 @@ private TimeSelectionListener listner ;
         Panel2.add(timePicker2);
         Panel.add(Panel2, "w 55%");
 
-        Button cmd=new Button();
+
+     Button cmd=new Button();
         cmd.setBackground(new Color(0, 0, 128));
         cmd.setForeground(new Color(250,250,250));
         cmd.setText("SAVE");
+     cmd.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Convert date to 'YYYY-MM-DD' format
+        SimpleDateFormat fromUser = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String reformattedDate = "";
+        try {
+            reformattedDate = myFormat.format(fromUser.parse(datePicker.getSelectedDateAsString()));
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        // Convert time to 24-hour format
+        SimpleDateFormat displayFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat parseFormat = new SimpleDateFormat("hh:mm a");
+        String reformattedBedTime = "";
+        String reformattedWakeTime = "";
+        try {
+            reformattedBedTime = displayFormat.format(parseFormat.parse(timePicker.getSelectedTime()));
+            reformattedWakeTime = displayFormat.format(parseFormat.parse(timePicker2.getSelectedTime()));
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        SleepDataDAO dao = new SleepDataDAO();
+        dao.insertData(reformattedDate, reformattedBedTime, reformattedWakeTime);
+
+        // Calculate the duration of sleep in hours
+        long hoursOfSleep = ChronoUnit.HOURS.between(LocalTime.parse(reformattedBedTime), LocalTime.parse(reformattedWakeTime));
+
+        // Display a message based on the duration of sleep
+        if (hoursOfSleep < 7) {
+            JOptionPane.showMessageDialog(Form_1.this, "Important: You are not getting enough sleep.");
+        } else {
+            JOptionPane.showMessageDialog(Form_1.this, "Not bad: You are getting a good amount of sleep.");
+        }
+    }
+});
         Panel.add(cmd,"w 40%, h 20");
     }
+
+    // ... existing code ...
+
 
     @SuppressWarnings("unchecked")
     private void initComponents() {

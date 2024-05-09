@@ -181,4 +181,32 @@ public void insertIntoDatabase() {
         ex.printStackTrace();
     }
 }
+    public void fetchFromDatabase(String username) {
+        try {
+            // Create a connection to the database
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+
+            // Prepare the SQL query
+            String query = "SELECT * FROM personal_info WHERE first_name = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            // Set the parameters
+            statement.setString(1, username);
+
+            // Execute the query
+            ResultSet resultSet = statement.executeQuery();
+
+            // Fetch the user's data
+            if (resultSet.next()) {
+                setFirstName(resultSet.getString("first_name"));
+                // Fetch other fields as needed...
+            }
+
+            // Close the statement and connection
+            statement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

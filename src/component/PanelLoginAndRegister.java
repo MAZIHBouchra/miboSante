@@ -30,7 +30,38 @@ import swingForm.MyTextField;
 
 
 public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
-    
+    private String name;
+    private String email;
+    private String password;
+    public static String currentUserName;
+    public static String currentUserEmail; // Add this line
+
+
+    // Getters and setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public PanelLoginAndRegister() {
         initComponents();
         initRegister();
@@ -196,36 +227,45 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     });
     login.add(cmd,"w 40%, h 40");
     }
-    
-    private boolean authenticateUser(String email, String password) {
-    boolean authenticated = false;
-    try {
-        // Établir une connexion à la base de données
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
-        
-        // Préparer la requête SQL pour rechercher l'utilisateur avec l'email donné et le mot de passe correspondant
-        String sql = "SELECT * FROM users WHERE email = ? AND mot_de_passe = ?";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, email);
-        statement.setString(2, password);
-        
-        // Exécuter la requête SQL
-        ResultSet resultSet = statement.executeQuery();
-        
-        // Vérifier si un utilisateur correspondant a été trouvé
-        if (resultSet.next()) {
-            authenticated = true; // L'utilisateur est authentifié avec succès
+
+
+        private boolean authenticateUser(String email, String password) {
+            boolean authenticated = false;
+            try {
+                // Establish a connection to the database
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+
+                // Prepare the SQL query to search for the user with the given email and password
+                String sql = "SELECT * FROM users WHERE email = ? AND mot_de_passe = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, email);
+                statement.setString(2, password);
+
+                // Execute the SQL query
+                ResultSet resultSet = statement.executeQuery();
+
+                // Check if a matching user was found
+                if (resultSet.next()) {
+                    authenticated = true; // The user is successfully authenticated
+                    name = resultSet.getString("nom"); // Store the user's name
+                    email = resultSet.getString("email"); // Store the user's email
+                    currentUserName = name; // Set the current user's name
+                    currentUserEmail = email;
+
+                }
+
+                // Close the resources
+                resultSet.close();
+                statement.close();
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace(); // Handle exceptions appropriately
+            }
+            return authenticated;
         }
-        
-        // Fermer les ressources
-        //resultSet.close();
-        //statement.close();
-        //connection.close();
-    } catch (SQLException ex) {
-        ex.printStackTrace(); // Gérer les exceptions appropriées
-    }
-    return authenticated;
-}
+
+        // Other code...
+
     private void showDashboard() {
     // Afficher le tableau de bord en changeant l'affichage ou en chargeant une nouvelle fenêtre
     // Exemple :
@@ -242,6 +282,38 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
             login.setVisible(true);
         }
     }
+public static void updateUser(String newEmail, String newPassword) {
+    try {
+        // Establish a connection to the database
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+
+        // Prepare the SQL update statement
+        String sql = "UPDATE users SET email = ?, mot_de_passe = ? WHERE nom = ?";
+
+        // Create a PreparedStatement
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        // Set the parameters
+        statement.setString(1, newEmail);
+        statement.setString(2, newPassword);
+        statement.setString(3, currentUserName);
+
+        // Execute the update
+        int rowsUpdated = statement.executeUpdate();
+        if (rowsUpdated > 0) {
+            System.out.println("User's email and password were updated successfully!");
+            JOptionPane.showMessageDialog(null, "User's email and password were updated successfully!", "Update Successful", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        // Close the resources
+        statement.close();
+        connection.close();
+    } catch (SQLException ex) {
+        System.out.println("Error while updating the user's email and password: " + ex.getMessage());
+    }
+}
+    // Rest of your code...
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -103,7 +103,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     try {
         //second to database simo "jdbc:mysql://localhost:3306/loginschema", "root", "1234"
         // Établir une connexion à la base de données
-        Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+        Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
         String query = "INSERT INTO users (nom, email, mot_de_passe) VALUES (?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);
         
@@ -201,7 +201,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     boolean authenticated = false;
     try {
         // Établir une connexion à la base de données
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
         
         // Préparer la requête SQL pour rechercher l'utilisateur avec l'email donné et le mot de passe correspondant
         String sql = "SELECT * FROM users WHERE email = ? AND mot_de_passe = ?";

@@ -7,6 +7,7 @@ package com.raven.main;
 
 import com.raven.event.EventMenuSelected;
 import com.raven.form.*;
+import form.MainForm;
 
 import java.awt.Color;
 import javax.swing.JComponent;
@@ -17,15 +18,13 @@ import javax.swing.JComponent;
  */
 public class Main extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Main
-     */
+
     private Form_Home home;
     private Form_1 form1;
     private Form_2 form2;
     private Form_3 form3;
      private Profile profile;
-
+    private MainForm mainForm;
 
     public Main() {
         initComponents();
@@ -35,18 +34,12 @@ public class Main extends javax.swing.JFrame {
         form2 = new Form_2();
         form3 = new Form_3();
         profile = new Profile();
+        mainForm = new MainForm();
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
-                if (index == 7) { // Assuming "Profile" is at index 7
-                    Profile profile = new Profile();
-                    // Assuming mainPanel is your main content panel
-                    mainPanel.removeAll();
-                    mainPanel.add(profile);
-                    mainPanel.revalidate();
-                    mainPanel.repaint();
-                } else if (index == 0) {
+                if (index == 0) {
                     setForm(home);
                 } else if (index == 1) {
                     setForm(form1);
@@ -58,10 +51,33 @@ public class Main extends javax.swing.JFrame {
                 else if (index == 8) {
                     setForm(profile);
                 }
+                if (index == 11) { // Assuming index 11 is the "Logout" option
+                    // Clear session data here...
+                    // Invalidate session on the server (if applicable)
+                    setVisible(false);  // Hide the Main window
+                    mainForm.setVisible(true); // Show the login form
+                }
+
             }
         });
         //  set when system open start with home form
         setForm(new Form_Home());
+    }
+
+    private void logoutAndRedirectToMainForm() {
+        try {
+            // Add your logout logic here...
+
+            // Hide the Main window
+
+            this.setVisible(false);
+
+            // Show the existing instance of MainForm
+            this.mainForm.setVisible(true);
+            } catch (Exception e) {
+            e.printStackTrace();
+            // Log the error or show an error message
+        }
     }
 
 

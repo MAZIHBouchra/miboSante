@@ -134,7 +134,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     try {
         //second to database simo "jdbc:mysql://localhost:3306/loginschema", "root", "1234"
         // Établir une connexion à la base de données
-        Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+        Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
         String query = "INSERT INTO users (nom, email, mot_de_passe) VALUES (?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);
         
@@ -227,6 +227,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     });
     login.add(cmd,"w 40%, h 40");
     }
+<<<<<<< HEAD
 
 
         private boolean authenticateUser(String email, String password) {
@@ -262,6 +263,27 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
                 ex.printStackTrace(); // Handle exceptions appropriately
             }
             return authenticated;
+=======
+    
+    private boolean authenticateUser(String email, String password) {
+    boolean authenticated = false;
+    try {
+        // Établir une connexion à la base de données
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
+        
+        // Préparer la requête SQL pour rechercher l'utilisateur avec l'email donné et le mot de passe correspondant
+        String sql = "SELECT * FROM users WHERE email = ? AND mot_de_passe = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, email);
+        statement.setString(2, password);
+        
+        // Exécuter la requête SQL
+        ResultSet resultSet = statement.executeQuery();
+        
+        // Vérifier si un utilisateur correspondant a été trouvé
+        if (resultSet.next()) {
+            authenticated = true; // L'utilisateur est authentifié avec succès
+>>>>>>> origin/master
         }
 
         // Other code...

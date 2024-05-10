@@ -79,7 +79,7 @@ public class LoginSignUp extends javax.swing.JLayeredPane {
     private void insertUserData(String name, String email, String password) {
         try {
             // Créer une connexion à la base de données et préparer la requête d'insertion
-            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/mibosanté", "root", "");
             String query = "INSERT INTO users (nom, email, mot_de_passe) VALUES (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
 
@@ -186,7 +186,7 @@ public class LoginSignUp extends javax.swing.JLayeredPane {
     public static void updateUser(String newEmail, String newPassword) {
     try {
         // Establish a connection to the database
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibosanté", "root", "");
 
         // Prepare the SQL update statement
         String sql = "UPDATE users SET email = ?, mot_de_passe = ? WHERE nom = ?";

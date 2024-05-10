@@ -33,7 +33,7 @@ public class Menu extends javax.swing.JPanel {
         listMenu1.addItem(new Model_Menu("icons8-sleep-25", "Sleep Track", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("icons8-weightlifting-25", "Physical activity Tracking", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("icons8-weight-25", "Weight tracking", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("icons8-drop-counter-25", "Blood Sugar Tracking", Model_Menu.MenuType.MENU));
+//        listMenu1.addItem(new Model_Menu("icons8-drop-counter-25", "Blood Sugar Tracking", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("icons8-health-report-25", "Data Analysis & Report", Model_Menu.MenuType.MENU));        
        
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));

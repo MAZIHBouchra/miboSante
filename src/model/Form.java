@@ -124,8 +124,8 @@ public boolean insertIntoDatabase() {
 
     try {
         // Create a connection to the database
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
-
+        //Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibosanté", "root", "");
         // Prepare the SQL query
         String query = "INSERT INTO personal_info (first_name, last_name, date_of_birth, gender, weight, size_in_cm) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -188,7 +188,8 @@ public boolean insertIntoDatabase() {
     public void fetchFromDatabase(String username) {
         try {
             // Create a connection to the database
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+            //Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibosanté", "root", "");
 
             // Prepare the SQL query
             String query = "SELECT * FROM personal_info WHERE first_name = ?";

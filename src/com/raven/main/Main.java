@@ -11,6 +11,7 @@ import View.LoginView;
 
 import java.awt.Color;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Main extends javax.swing.JFrame {
     private Form_1 form1;
     private Form_2 form2;
     private Form_3 form3;
+    private Form_4 form4; 
      private Profile profile;
     private LoginView loginView;
 
@@ -33,6 +35,8 @@ public class Main extends javax.swing.JFrame {
         form1 = new Form_1();
         form2 = new Form_2();
         form3 = new Form_3();
+        form4 = new Form_4();
+        loginView = new LoginView();
         profile = new Profile();
         loginView = new LoginView();
         menu.initMoving(Main.this);
@@ -48,16 +52,19 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 3) {
                     setForm(form3);
                 }
-                else if (index == 8) {
+                 else if(index == 4){
+                    setForm(form4);   
+                 }
+                 else if (index == 7) {
                     setForm(profile);
                 }
-                if (index == 11) { // Assuming index 11 is the "Logout" option
-                    // Clear session data here...
-                    // Invalidate session on the server (if applicable)
-                    setVisible(false);  // Hide the Main window
-                    loginView.setVisible(true); // Show the login form
+                else if(index == 9){
+           int choice = JOptionPane.showConfirmDialog(Main.this, "Are you sure you want to log out?", "Logout Confirmation", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                dispose();
+                loginView.setVisible(true);
+            }
                 }
-
             }
         });
         //  set when system open start with home form

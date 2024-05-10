@@ -33,7 +33,7 @@ public class Menu extends javax.swing.JPanel {
         listMenu1.addItem(new Model_Menu("icons8-sleep-25", "Sleep Track", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("icons8-weightlifting-25", "Physical activity Tracking", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("icons8-weight-25", "Weight tracking", Model_Menu.MenuType.MENU));
-//        listMenu1.addItem(new Model_Menu("icons8-drop-counter-25", "Blood Sugar Tracking", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("icons8-drop-counter-25", "Blood Sugar Tracking", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("icons8-health-report-25", "Data Analysis & Report", Model_Menu.MenuType.MENU));        
        
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
@@ -41,7 +41,7 @@ public class Menu extends javax.swing.JPanel {
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
         listMenu1.addItem(new Model_Menu("8", "Profile", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("9", "More", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("11", "Logout", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("icons8-logout-25", "Logout", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
     }
 
@@ -57,8 +57,7 @@ public class Menu extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/logo.png"))); // NOI18N
-        jLabel1.setText("Application");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/mbMenu.png"))); // NOI18N
 
         javax.swing.GroupLayout panelMovingLayout = new javax.swing.GroupLayout(panelMoving);
         panelMoving.setLayout(panelMovingLayout);
@@ -66,8 +65,8 @@ public class Menu extends javax.swing.JPanel {
             panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMovingLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel1)
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         panelMovingLayout.setVerticalGroup(
             panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

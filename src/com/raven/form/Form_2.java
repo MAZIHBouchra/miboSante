@@ -5,6 +5,7 @@
  */
 package com.raven.form;
 
+import com.raven.model.StatusType;
 import com.raven.swing.ScrollBar;
 import java.awt.Color;
 import java.awt.Font;
@@ -12,10 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import net.miginfocom.swing.MigLayout;
-import swingDesign.Button;
-import swingDesign.MyTextField;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,6 +26,8 @@ import java.sql.SQLException;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import swingDesign.Button;
+import swingDesign.MyTextField;
 
 
 /**
@@ -75,9 +78,90 @@ public class Form_2 extends javax.swing.JPanel {
                 
                 saveActivityData(date, type, duree);
                 loadActivityData();
+                
+                // Vider les champs de texte après la sauvegarde
+                TextDate.setText("");
+                txtType.setText("");
+                txtDuree.setText("");
             }
         });
-        Panel.add(cmd, "w 40%, h 40");
+        Panel.add(cmd, "w 20%, h 20");
+        Button Update = new Button();
+        Update.setBackground(new Color(0, 0, 128));
+        Update.setForeground(new Color(250, 250, 250));
+        Update.setText("Update");
+
+       Update.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Obtenez les nouvelles valeurs des champs de texte
+        String newDate = TextDate.getText();
+        String newType = txtType.getText();
+        String newDuree = txtDuree.getText();
+        
+        // Obtenez l'index de la ligne sélectionnée
+        int selectedRow = table.getSelectedRow();
+        
+        // Vérifiez si une ligne est sélectionnée
+        if (selectedRow != -1) {
+            // Obtenez les anciennes valeurs des champs de la ligne sélectionnée
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            String date = (String) model.getValueAt(selectedRow, 0);
+            String type = (String) model.getValueAt(selectedRow, 1);
+            String duree = (String) model.getValueAt(selectedRow, 2);
+            
+            // Mettez à jour les données dans la base de données avec les nouvelles valeurs
+            //updateActivityData(date, type, duree, newDate, newType, newDuree);
+            
+            // Mettez à jour les valeurs dans le modèle de table avec les nouvelles valeurs
+            model.setValueAt(newDate, selectedRow, 0);
+            model.setValueAt(newType, selectedRow, 1);
+            model.setValueAt(newDuree, selectedRow, 2);
+            
+            // Réinitialisez les champs de texte
+            TextDate.setText("");
+            txtType.setText("");
+            txtDuree.setText("");
+            
+            // Activez à nouveau le bouton "Save" et désactivez le bouton "Update"
+            cmd.setEnabled(true);
+            Update.setEnabled(false);
+        }
+    }
+});
+
+      Panel.add(Update, "w 20%, h 20");
+      Button  Delete = new Button();
+      Delete.setBackground(new Color(0, 0, 128));
+      Delete.setForeground(new Color(250, 250, 250));
+      Delete.setText("Delete");
+        
+        
+        
+       Delete.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+    // Obtenez l'index de la ligne sélectionnée
+    int selectedRow = table.getSelectedRow();
+    
+    // Vérifiez si une ligne est sélectionnée
+    if (selectedRow != -1) {
+        // Obtenez les données de la ligne sélectionnée avant de la supprimer du modèle de table
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        String date = (String) model.getValueAt(selectedRow, 0);
+        String type = (String) model.getValueAt(selectedRow, 1);
+        String duree = (String) model.getValueAt(selectedRow, 2);
+        
+        // Supprimez la ligne sélectionnée du modèle de table
+        model.removeRow(selectedRow);
+        
+        // Supprimez les données correspondantes de la base de données
+        deleteActivityData(date, type, duree);
+    }
+    }
+        });
+        Panel.add(Delete, "w 20%, h 20");
+        
 
         // Table to display activity data
         
@@ -87,29 +171,42 @@ public class Form_2 extends javax.swing.JPanel {
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        
+        
+        
+        
+        
     }
     
-    /*private void loadActivityData() {
-        tableModel.setRowCount(0); // Clear table
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
-            String sql = "SELECT * FROM ActivitePhysique";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                Vector row = new Vector();
-                row.add(rs.getString("date"));
-                row.add(rs.getString("type"));
-                row.add(rs.getString("duree"));
-                tableModel.addRow(row);
-            }
-            //rs.close();
-            //statement.close();
-            //connection.close();
-        } catch (SQLException ex) {
-            System.out.println("Error loading activity data: " + ex.getMessage());
+
+    private void deleteActivityData(String date, String type, String duree) {
+    try {
+        // Établir une connexion à la base de données
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
+        
+        // Préparer la requête SQL de suppression
+        String sql = "DELETE FROM ActivitePhysique WHERE date = ? AND type = ? AND duree = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, date);
+        statement.setString(2, type);
+        statement.setString(3, duree);
+        
+        // Exécuter la requête SQL
+        int rowsDeleted = statement.executeUpdate();
+        if (rowsDeleted > 0) {
+            System.out.println("Les données de l'activité physique ont été supprimées avec succès !");
         }
-    }*/
+        
+        // Fermer la connexion et la déclaration
+        //statement.close();
+        //connection.close();
+    } catch (SQLException ex) {
+        System.out.println("Erreur lors de la suppression des données de l'activité physique : " + ex.getMessage());
+    }
+}
+
+    
+    
     
     private void loadActivityData() {
     // Effacez les données actuelles de la table
@@ -133,20 +230,11 @@ public class Form_2 extends javax.swing.JPanel {
             row.add(type);
             row.add(duree);
             
-            // Créez deux boutons pour la colonne "Action"
-            JButton buttonModifier = new JButton("Modifier");
-            JButton buttonSupprimer = new JButton("Supprimer");
             
-            // Ajoutez les boutons à la ligne
-            row.add(buttonModifier);
-            row.add(buttonSupprimer);
             
             // Ajoutez la ligne au modèle de table
             model.addRow(row);
         }
-        // Utilisez le rendu personnalisé pour les boutons dans la colonne "Action"
-        table.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
-        table.getColumnModel().getColumn(3).setCellRenderer(new ButtonRenderer());
         
         // Fermez les ressources
         rs.close();
@@ -208,11 +296,11 @@ public class Form_2 extends javax.swing.JPanel {
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 242, Short.MAX_VALUE)
+            .addGap(0, 286, Short.MAX_VALUE)
         );
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
@@ -228,11 +316,11 @@ public class Form_2 extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Date", "Type", "Duration", "Action"
+                "Date", "Type", "Duration"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -260,29 +348,22 @@ public class Form_2 extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+                .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -295,9 +376,9 @@ public class Form_2 extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

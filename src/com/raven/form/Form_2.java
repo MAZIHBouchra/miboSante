@@ -5,7 +5,6 @@
  */
 package com.raven.form;
 
-import com.raven.model.StatusType;
 import com.raven.swing.ScrollBar;
 import java.awt.Color;
 import java.awt.Font;
@@ -13,11 +12,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import net.miginfocom.swing.MigLayout;
-import swingForm.Button;
-import swingForm.MyTextField;
+import swingDesign.Button;
+import swingDesign.MyTextField;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -7,7 +7,7 @@ package com.raven.main;
 
 import com.raven.event.EventMenuSelected;
 import com.raven.form.*;
-import form.MainForm;
+import View.LoginView;
 
 import java.awt.Color;
 import javax.swing.JComponent;
@@ -24,7 +24,7 @@ public class Main extends javax.swing.JFrame {
     private Form_2 form2;
     private Form_3 form3;
      private Profile profile;
-    private MainForm mainForm;
+    private LoginView loginView;
 
     public Main() {
         initComponents();
@@ -34,7 +34,7 @@ public class Main extends javax.swing.JFrame {
         form2 = new Form_2();
         form3 = new Form_3();
         profile = new Profile();
-        mainForm = new MainForm();
+        loginView = new LoginView();
         menu.initMoving(Main.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -55,7 +55,7 @@ public class Main extends javax.swing.JFrame {
                     // Clear session data here...
                     // Invalidate session on the server (if applicable)
                     setVisible(false);  // Hide the Main window
-                    mainForm.setVisible(true); // Show the login form
+                    loginView.setVisible(true); // Show the login form
                 }
 
             }
@@ -73,7 +73,7 @@ public class Main extends javax.swing.JFrame {
             this.setVisible(false);
 
             // Show the existing instance of MainForm
-            this.mainForm.setVisible(true);
+            this.loginView.setVisible(true);
             } catch (Exception e) {
             e.printStackTrace();
             // Log the error or show an error message

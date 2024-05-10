@@ -8,12 +8,10 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import swingForm.MyTextField;
-import javax.swing.JPasswordField;
-import Fromulaire.TextField;
-import swingForm.Button;
-import Fromulaire.FormData;
-import component.PanelLoginAndRegister;
+
+import swingDesign.TextField;
+import swingDesign.Button;
+import model.LoginSignUp;
 public class Profile extends JPanel {
 
     public Profile() {
@@ -23,7 +21,7 @@ public class Profile extends JPanel {
         setAlignmentX(Component.CENTER_ALIGNMENT);
         ImageAvatar avatarImage = new ImageAvatar();
         avatarImage.setPreferredSize(new Dimension(150, 150));
-        String userName = PanelLoginAndRegister.currentUserName; // Fetch the user's name
+        String userName = LoginSignUp.currentUserName; // Fetch the user's name
         JLabel weclome = new JLabel("Welcome, " + userName); // Display the user's name
         weclome.setFont(new Font("sansserif",1,30));
         weclome.setForeground(Color.black);
@@ -59,7 +57,7 @@ public class Profile extends JPanel {
         editInfoLabel.setForeground(new Color(0, 0, 128));
         add(editInfoLabel);
 
-        String userEmail = PanelLoginAndRegister.currentUserEmail; // Fetch the user's email
+        String userEmail = LoginSignUp.currentUserEmail; // Fetch the user's email
         JLabel emailLabel = new JLabel("current Email: " + userEmail); // Display the user's email
         emailLabel.setFont(new Font("sansserif",1,20));
         emailLabel.setForeground(Color.black);
@@ -101,7 +99,7 @@ public class Profile extends JPanel {
                 String newPassword = txtPassword.getText();
 
                 // Update the user's email and password
-                PanelLoginAndRegister.updateUser(newEmail, newPassword);
+                LoginSignUp.updateUser(newEmail, newPassword);
                 txtEmail.setText("");
                 txtPassword.setText("");
             }

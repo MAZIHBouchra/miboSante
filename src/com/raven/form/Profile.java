@@ -49,7 +49,7 @@ public class Profile extends JPanel {
         add(btnImportImage);
 
         JPanel avatarPanel = new JPanel();
-        avatarPanel.setMaximumSize(new Dimension(200, 250));
+        avatarPanel.setMaximumSize(new Dimension(200, 200));
         avatarPanel.add(avatarImage);
         add(avatarPanel);
         JLabel editInfoLabel = new JLabel("Edit Information");
@@ -64,32 +64,45 @@ public class Profile extends JPanel {
         add(emailLabel);
 
 
-        JLabel editEmailLabel = new JLabel("Edit Email");
-        editEmailLabel.setFont(new Font("sansserif",1,20));
+// Email edit section
+        JPanel emailPanel = new JPanel();
+        emailPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        emailPanel.setMaximumSize(new Dimension(400, 60));
+
+        JLabel editEmailLabel = new JLabel("Edit Email:");
+        editEmailLabel.setFont(new Font("sansserif", 1, 20));
         editEmailLabel.setForeground(new Color(0, 0, 128));
-        add(editEmailLabel);
 
-       TextField txtEmail = new TextField();
+        TextField txtEmail = new TextField();
+        txtEmail.setPreferredSize(new Dimension(400, 60)); // Adjust the size as needed
 
-        txtEmail.setMaximumSize(new Dimension(400, 60)); // Set the maximum size
-        add(txtEmail);
+        emailPanel.add(editEmailLabel);
+        emailPanel.add(txtEmail);
 
+        add(emailPanel);
 
+// Password edit section
+        JPanel passwordPanel = new JPanel();
+        passwordPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        passwordPanel.setMaximumSize(new Dimension(400, 60));
 
-
-        JLabel editPasswordLabel = new JLabel("Edit Password");
-        editPasswordLabel.setFont(new Font("sansserif",1,20));
+        JLabel editPasswordLabel = new JLabel("Edit Password:");
+        editPasswordLabel.setFont(new Font("sansserif", 1, 20));
         editPasswordLabel.setForeground(new Color(0, 0, 128));
 
-        add(editPasswordLabel);
         TextField txtPassword = new TextField();
-        txtPassword.setMaximumSize(new Dimension(400, 60));
-        add(txtPassword);
+        txtPassword.setPreferredSize(new Dimension(400, 60)); // Adjust the size as needed
+
+        passwordPanel.add(editPasswordLabel);
+        passwordPanel.add(txtPassword);
+
+        add(passwordPanel);
 
 
         Button btnEdit=new Button();
         btnEdit.setBackground(new Color(0, 0, 128));
         btnEdit.setForeground(new Color(250,250,250));
+
         btnEdit.setText("         EDIT         ");
         btnEdit.addActionListener(new ActionListener() {
             @Override

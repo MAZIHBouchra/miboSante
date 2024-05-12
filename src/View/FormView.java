@@ -12,11 +12,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.UIManager;
 import net.miginfocom.swing.MigLayout;
 import swingDesign.*;
+import model.LoginSignUp ;
 
-/**
- *
- * @author AdMin
- */
 public class FormView extends javax.swing.JFrame {
     private raven.datetime.component.date.DatePicker datePicker;
 
@@ -571,7 +568,7 @@ if (selectedCalendar != null) {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         Form form = getFormData();
-        if (form.insertIntoDatabase()) {
+        if (form.insertIntoDatabase(LoginSignUp.currentUserId)) {
             // This will hide and dispose the FormView window
             this.dispose();
 

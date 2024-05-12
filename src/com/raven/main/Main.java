@@ -55,10 +55,10 @@ public class Main extends javax.swing.JFrame {
                  else if(index == 4){
                     setForm(form4);   
                  }
-                 else if (index == 7) {
+                 else if (index == 8) {
                     setForm(profile);
                 }
-                else if(index == 9){
+                else if(index == 10){
            int choice = JOptionPane.showConfirmDialog(Main.this, "Are you sure you want to log out?", "Logout Confirmation", JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
                 dispose();

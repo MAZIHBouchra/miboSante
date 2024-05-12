@@ -30,7 +30,7 @@ import swingDesign.MyTextField;
 public class LoginSignUp extends javax.swing.JLayeredPane {
     public static String currentUserName;
     public static String currentUserEmail; // A
-
+    public static int currentUserId;
     public LoginSignUp() {
         initComponents();
         initRegister();
@@ -79,7 +79,7 @@ public class LoginSignUp extends javax.swing.JLayeredPane {
     private void insertUserData(String name, String email, String password) {
         try {
             // Créer une connexion à la base de données et préparer la requête d'insertion
-            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/mibosanté", "root", "");
+            Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
             String query = "INSERT INTO users (nom, email, mot_de_passe) VALUES (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
 
@@ -153,7 +153,7 @@ public class LoginSignUp extends javax.swing.JLayeredPane {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
 
             // Prepare the SQL query to search for the user with the given email and matching password
-            String sql = "SELECT * FROM users WHERE email = ? AND mot_de_passe = ?";
+            String sql = "SELECT * FROM users WHERE  email = ? AND mot_de_passe = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, email);
             statement.setString(2, password);
@@ -165,10 +165,11 @@ public class LoginSignUp extends javax.swing.JLayeredPane {
             if (resultSet.next()) {
                 authenticated = true; // The user is successfully authenticated
                 String userName = resultSet.getString("nom"); // Store the user's name
-                email = resultSet.getString("email"); // Store the user's email
+                email = resultSet.getString("email");
+                int userId = resultSet.getInt("id");// Store the user's email
                 currentUserName = userName; // Set the current user's name
                 currentUserEmail = email; // Set the current user's email
-
+                currentUserId = userId ;
                 // Create a Profile instance and display the user's name and email
 
 
@@ -186,7 +187,7 @@ public class LoginSignUp extends javax.swing.JLayeredPane {
     public static void updateUser(String newEmail, String newPassword) {
     try {
         // Establish a connection to the database
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mibosanté", "root", "");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
 
         // Prepare the SQL update statement
         String sql = "UPDATE users SET email = ?, mot_de_passe = ? WHERE nom = ?";

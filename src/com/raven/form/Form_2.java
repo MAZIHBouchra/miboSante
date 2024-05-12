@@ -47,7 +47,34 @@ public class Form_2 extends javax.swing.JPanel {
         loadActivityData();
         Panel.setVisible(true);
     }
-    
+private void updateActivityData(String oldDate, String oldType, String oldDuree, String newDate, String newType, String newDuree) {
+    try {
+        // Establish a connection to the database
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
+
+        // Prepare the SQL UPDATE query
+        String sql = "UPDATE ActivitePhysique SET date = ?, type = ?, duree = ? WHERE date = ? AND type = ? AND duree = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, newDate);
+        statement.setString(2, newType);
+        statement.setString(3, newDuree);
+        statement.setString(4, oldDate);
+        statement.setString(5, oldType);
+        statement.setString(6, oldDuree);
+
+        // Execute the SQL query
+        int rowsUpdated = statement.executeUpdate();
+        if (rowsUpdated > 0) {
+            System.out.println("The physical activity data was updated successfully!");
+        }
+
+        // Close the statement and connection
+        statement.close();
+        connection.close();
+    } catch (SQLException ex) {
+        System.out.println("Error while updating the physical activity data: " + ex.getMessage());
+    }
+}
         // Méthode pour initialiser le formulaire d'enregistrement
     private void initRegister() {
         Panel.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]10[]25[]push"));
@@ -64,7 +91,7 @@ public class Form_2 extends javax.swing.JPanel {
         MyTextField txtDuree = new MyTextField();
         txtDuree.setHint("duration of physical activity");
         Panel.add(txtDuree, "w 60%");
-        
+
         Button cmd = new Button();
         cmd.setBackground(new Color(0, 0, 128));
         cmd.setForeground(new Color(250, 250, 250));
@@ -75,10 +102,10 @@ public class Form_2 extends javax.swing.JPanel {
                 String date = TextDate.getText();
                 String type = txtType.getText();
                 String duree = txtDuree.getText();
-                
+
                 saveActivityData(date, type, duree);
                 loadActivityData();
-                
+
                 // Vider les champs de texte après la sauvegarde
                 TextDate.setText("");
                 txtType.setText("");
@@ -87,49 +114,57 @@ public class Form_2 extends javax.swing.JPanel {
         });
         Panel.add(cmd, "w 20%, h 20");
         Button Update = new Button();
-        Update.setBackground(new Color(0, 0, 128));
-        Update.setForeground(new Color(250, 250, 250));
-        Update.setText("Update");
+Update.setBackground(new Color(0, 0, 128));
+Update.setForeground(new Color(250, 250, 250));
+Update.setText("Update");
+        Update.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Get the index of the selected row
+                int selectedRow = table.getSelectedRow();
 
-       Update.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Obtenez les nouvelles valeurs des champs de texte
-        String newDate = TextDate.getText();
-        String newType = txtType.getText();
-        String newDuree = txtDuree.getText();
-        
-        // Obtenez l'index de la ligne sélectionnée
-        int selectedRow = table.getSelectedRow();
-        
-        // Vérifiez si une ligne est sélectionnée
-        if (selectedRow != -1) {
-            // Obtenez les anciennes valeurs des champs de la ligne sélectionnée
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-            String date = (String) model.getValueAt(selectedRow, 0);
-            String type = (String) model.getValueAt(selectedRow, 1);
-            String duree = (String) model.getValueAt(selectedRow, 2);
-            
-            // Mettez à jour les données dans la base de données avec les nouvelles valeurs
-            //updateActivityData(date, type, duree, newDate, newType, newDuree);
-            
-            // Mettez à jour les valeurs dans le modèle de table avec les nouvelles valeurs
-            model.setValueAt(newDate, selectedRow, 0);
-            model.setValueAt(newType, selectedRow, 1);
-            model.setValueAt(newDuree, selectedRow, 2);
-            
-            // Réinitialisez les champs de texte
-            TextDate.setText("");
-            txtType.setText("");
-            txtDuree.setText("");
-            
-            // Activez à nouveau le bouton "Save" et désactivez le bouton "Update"
-            cmd.setEnabled(true);
-            Update.setEnabled(false);
-        }
-    }
-});
+                // Check if a row is selected
+                if (selectedRow != -1) {
+                    // Get the old values from the selected row
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+                    String oldDate = (String) model.getValueAt(selectedRow, 0);
+                    String oldType = (String) model.getValueAt(selectedRow, 1);
+                    String oldDuree = (String) model.getValueAt(selectedRow, 2);
 
+                    // Get the new values from the text fields
+                    String newDate = TextDate.getText();
+                    String newType = txtType.getText();
+                    String newDuree = txtDuree.getText();
+
+                    // Check if the new values are not empty
+                    if (!newDate.isEmpty() && !newType.isEmpty() && !newDuree.isEmpty()) {
+                        // Update the data in the database with the new values
+                        updateActivityData(oldDate, oldType, oldDuree, newDate, newType, newDuree);
+
+                        // Update the values in the table model with the new values
+                        model.setValueAt(newDate, selectedRow, 0);
+                        model.setValueAt(newType, selectedRow, 1);
+                        model.setValueAt(newDuree, selectedRow, 2);
+
+                        // Reset the text fields
+                        TextDate.setText("");
+                        txtType.setText("");
+                        txtDuree.setText("");
+
+                        // Enable the "Save" button and disable the "Update" button
+                        cmd.setEnabled(true);
+
+                    } else {
+                        System.out.println("Please fill in all fields before updating.");
+                    }
+                } else {
+                    System.out.println("Please select a row to update.");
+                }
+            }
+        });
+
+
+Panel.add(Update, "w 20%, h 20");
       Panel.add(Update, "w 20%, h 20");
       Button  Delete = new Button();
       Delete.setBackground(new Color(0, 0, 128));
@@ -177,12 +212,12 @@ public class Form_2 extends javax.swing.JPanel {
         
         
     }
-    
+
 
     private void deleteActivityData(String date, String type, String duree) {
     try {
         // Établir une connexion à la base de données
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
         
         // Préparer la requête SQL de suppression
         String sql = "DELETE FROM ActivitePhysique WHERE date = ? AND type = ? AND duree = ?";
@@ -214,7 +249,7 @@ public class Form_2 extends javax.swing.JPanel {
     model.setRowCount(0);
     
     try {
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
         String sql = "SELECT * FROM ActivitePhysique";
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet rs = statement.executeQuery();
@@ -250,7 +285,7 @@ public class Form_2 extends javax.swing.JPanel {
   private void saveActivityData(String date, String type, String duree) {
     try {
         // Établir une connexion à la base de données
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
         
         // Préparer la requête SQL d'insertion
         String sql = "INSERT INTO ActivitePhysique (date, type, duree) VALUES (?, ?, ?)";

@@ -31,7 +31,7 @@ public class Form_3 extends javax.swing.JPanel {
     model.setRowCount(0);
     
     try {
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/miboSanté", "root", "");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/loginschema", "root", "1234");
         String sql = "SELECT periode_journee,regime_alimentaire,activite_physique FROM pertepoids";
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet rs = statement.executeQuery();

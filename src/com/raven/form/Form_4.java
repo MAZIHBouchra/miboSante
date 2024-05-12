@@ -19,28 +19,23 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
-import static java.awt.print.Printable.PAGE_EXISTS;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Vector;
-import javax.swing.table.DefaultTableModel;
+import  model.Form;
+import model.LoginSignUp;
 
 /**
  *
  * @author univers
  */
 public class Form_4 extends javax.swing.JPanel {
-    
+
     public Form_4() {
         initComponents();
+        // Fetch and display user data on initialization
+        updateLabels();
     }
-                        
-          //MPanel.add(printButton);
+
+
+    //MPanel.add(printButton);
 //        printButton = new JButton("Imprimer rapport");
 //        printButton.addActionListener(new ActionListener() {
 //            public void actionPerformed(ActionEvent e) {
@@ -55,18 +50,42 @@ public class Form_4 extends javax.swing.JPanel {
 //
 //        setLayout(new BorderLayout());
 //        add(circularPanel, BorderLayout.CENTER);
-    
-     
-  private void printReport() {
+
+    private void updateLabels() {
+        Form form = new Form();
+        boolean dataFetched = form.fetchFromDatabase(LoginSignUp.currentUserId);
+
+        if (dataFetched) {
+            jLabel7.setText(form.getFirstName() + " " + form.getLastName());
+            jLabel8.setText(String.valueOf(form.getWeight()) + " Kg");
+            jLabel9.setText(String.valueOf(form.getSizeInCm()) + " cm");
+            jLabel12.setText(form.getMostDoneExercise());
+            jLabel10.setText(form.getMainGoal());
+        } else {
+            // Handle the case where data fetching fails (e.g., display error message)
+            JOptionPane.showMessageDialog(this, "Error fetching user data.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void printReport(int userId) {
+        // Fetch the user's data
+        Form form = new Form();
+        boolean dataFetched = form.fetchFromDatabase(userId);
+
+        if (!dataFetched) {
+            JOptionPane.showMessageDialog(this, "Error: Could not fetch data for user with ID " + userId, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         // Données à imprimer
-        String userName = "Amine";
-        String weidght = "75 Kg";
-        String Size= "185 cm";
-        String activite = "Running";
-        String goalH = "Lost Width";
+        String userName = form.getFirstName() + " " + form.getLastName();
+        String weight = String.valueOf(form.getWeight());
+        String size = String.valueOf(form.getSizeInCm());
+        String activity = form.getMostDoneExercise();
+        String goal = form.getMainGoal();
 
         // Créer une instance de CustomPrintable avec les données à imprimer
-        Printable printable = new CustomPrintable(userName, weidght, Size, activite,goalH);
+        Printable printable = new CustomPrintable(userName, weight, size, activity, goal);
 
         // Configurer l'impression
         PrinterJob printerJob = PrinterJob.getPrinterJob();
@@ -82,9 +101,12 @@ public class Form_4 extends javax.swing.JPanel {
             }
         }
     }
+
+    // ... rest of the code ...
+
    //Classe interne pour définir le contenu à imprimer
     class CustomPrintable implements Printable {
-        private String userName;
+        private String userName ;
         private String weight;
         private String size;
         private String activite;
@@ -323,14 +345,14 @@ public class Form_4 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        jButton1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                printReport();
-            }
-        });
-    }//GEN-LAST:event_jButton1ActionPerformed
+   private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+    jButton1.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            // Use the current user's ID when calling the printReport method
+            printReport(LoginSignUp.currentUserId);
+        }
+    });
+}//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

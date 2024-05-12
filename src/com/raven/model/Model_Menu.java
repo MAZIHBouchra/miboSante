@@ -2,6 +2,7 @@ package com.raven.model;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import java.net.URL;
 
 public class Model_Menu {
 
@@ -43,8 +44,15 @@ public class Model_Menu {
     private MenuType type;
 
     public Icon toIcon() {
-        return new ImageIcon(getClass().getResource("/com/raven/icon/" + icon + ".png"));
-    }
+
+        URL location = getClass().getResource("/com/raven/icon/" + icon + ".png");
+        if (location != null) {
+            ImageIcon icon = new ImageIcon(location);
+            return icon;
+        } else {
+            System.err.println("Image not found: "+ "/com/raven/icon/" + icon + ".png");
+            return null;
+        }    }
 
     public static enum MenuType {
         TITLE, MENU, EMPTY
